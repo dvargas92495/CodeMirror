@@ -22,7 +22,7 @@ export function removeChildrenAndAdd(parent, e) {
 }
 
 export function elt(tag, content, className, style) {
-  if (typeof document === 'undefined') return undefined;
+  if (typeof document === 'undefined') return {};
   let e = document.createElement(tag)
   if (className) e.className = className
   if (style) e.style.cssText = style
