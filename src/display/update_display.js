@@ -60,7 +60,7 @@ function selectionSnapshot(cm) {
   let active = activeElt()
   if (!active || !contains(cm.display.lineDiv, active)) return null
   let result = {activeElt: active}
-  if (window.getSelection) {
+  if (typeof window !== 'undefined' && window.getSelection) {
     let sel = window.getSelection()
     if (sel.anchorNode && sel.extend && contains(cm.display.lineDiv, sel.anchorNode)) {
       result.anchorNode = sel.anchorNode
@@ -75,7 +75,7 @@ function selectionSnapshot(cm) {
 function restoreSelection(snapshot) {
   if (!snapshot || !snapshot.activeElt || snapshot.activeElt == activeElt()) return
   snapshot.activeElt.focus()
-  if (!/^(INPUT|TEXTAREA)$/.test(snapshot.activeElt.nodeName) &&
+  if (typeof document !== 'undefined' && !/^(INPUT|TEXTAREA)$/.test(snapshot.activeElt.nodeName) &&
       snapshot.anchorNode && contains(document.body, snapshot.anchorNode) && contains(document.body, snapshot.focusNode)) {
     let sel = window.getSelection(), range = document.createRange()
     range.setEnd(snapshot.anchorNode, snapshot.anchorOffset)

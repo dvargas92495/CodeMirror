@@ -56,7 +56,7 @@ export let splitLinesAuto = "\n\nb".split(/\n/).length != 3 ? string => {
   return result
 } : string => string.split(/\r\n?|\n/)
 
-export let hasSelection = window.getSelection ? te => {
+export let hasSelection = typeof window !== 'undefined' && window.getSelection ? te => {
   try { return te.selectionStart != te.selectionEnd }
   catch(e) { return false }
 } : te => {
