@@ -68,6 +68,7 @@ export let hasSelection = typeof window !== 'undefined' && window.getSelection ?
 }
 
 export let hasCopyEvent = (() => {
+  if (typeof 'document' === 'undefined') return false;
   let e = elt("div")
   if ("oncopy" in e) return true
   e.setAttribute("oncopy", "return;")
