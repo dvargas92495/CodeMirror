@@ -3,6 +3,7 @@
   "version": "5.65.6",
   "main": "lib/codemirror.js",
   "style": "lib/codemirror.css",
+  "types": "lib/codemirror.d.ts",
   "author": {
     "name": "Marijn Haverbeke",
     "email": "marijnh@gmail.com",

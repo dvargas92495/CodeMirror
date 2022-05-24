@@ -22,6 +22,7 @@ export function removeChildrenAndAdd(parent, e) {
 }
 
 export function elt(tag, content, className, style) {
+  if (typeof document === 'undefined') return undefined;
   let e = document.createElement(tag)
   if (className) e.className = className
   if (style) e.style.cssText = style
@@ -69,10 +70,14 @@ export function activeElt() {
   // IE < 10 will throw when accessed while the page is loading or in an iframe.
   // IE > 9 and Edge will throw when accessed in an iframe if document.body is unavailable.
   let activeElement
-  try {
-    activeElement = document.activeElement
-  } catch(e) {
-    activeElement = document.body || null
+  if (typeof document === 'undefined') {
+    activeElement = null;
+  } else {
+    try {
+      activeElement = document.activeElement
+    } catch(e) {
+      activeElement = document.body || null
+    }
   }
   while (activeElement && activeElement.shadowRoot && activeElement.shadowRoot.activeElement)
     activeElement = activeElement.shadowRoot.activeElement
